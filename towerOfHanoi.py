@@ -1,12 +1,18 @@
 import sys
 
+def towerOfHanoi(N, fromm, to, aux):
+    # if N == 1:
+    #     print(f"move disk 1 from rod {fromm} to rod {to}")
+    #     count.append(1)
+    #     return
+    if N == 0:
+        return 0
+    
+    moves = towerOfHanoi(N-1, fromm, aux, to)
+    print(f"move disk {N} from rod {fromm} to rod {to}")
+    moves += 1
+    moves += towerOfHanoi(N-1, aux, to, fromm)
+    return moves
 
-def towerOfHanoi(N, a, b, c):
-    if N == 1:
-        print(f"Move 1 from {a} to {c}")
-        return
-    towerOfHanoi(N-1, a, c, b)
-    print(f"Move {N} from {a} to {c}")
-    towerOfHanoi(N-1, b, a, c)
+print(towerOfHanoi(int(sys.argv[1]), 1, 3, 2))
 
-towerOfHanoi(int(sys.argv[1]), 'a', 'b', 'c')
